@@ -38,6 +38,6 @@ public class CustomScope implements Scope {
 
     @Override
     public String getConversationId() {
-        return "tenant";
+        return "customscope";
     }
 }

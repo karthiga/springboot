@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.app.rippleapp.bean.User;
+import com.app.rippleapp.bean.dao.User;
 import com.app.rippleapp.service.UserService;
 import com.app.rippleapp.utils.exception.EntityNotFoundException;
 
@@ -42,24 +43,30 @@ public class UserController {
 //method that posts a new user detail   
 	@PostMapping("/users")
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
-		Integer id = user.getId();
-		User createdUser = userService.saveOrUpdate(user);
+		User createdUser = userService.saveOrUpdate(user, null);
 //Use servlet component builder to return appropriate http status
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(createdUser.getId()).toUri();
-		//Return appropriate http status Created if new or accepted if update
-		if (null == id) {
-			return ResponseEntity.created(location).build();
-		} else {
-			return ResponseEntity.accepted().build();
-		}
+		// Return appropriate http status Created if new or accepted if update
+
+		return ResponseEntity.created(location).build();
+	}
+
+	// method that posts a new user detail
+	@PutMapping("/users/{id}")
+	public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable Integer id) {
+
+		userService.saveOrUpdate(user, id);
+
+		// Return appropriate http status Created if new or accepted if update
+
+		return ResponseEntity.accepted().build();
+
 	}
 
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
-		Optional<User> user = userService.deleteById(id);
-		if (user == null)
-//runtime exception  
-			throw new EntityNotFoundException("No user found for id: " + id);
+		 userService.deleteById(id);
+		
 	}
 }

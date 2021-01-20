@@ -1,5 +1,5 @@
 {
-	 "info": {
+	"info": {
 		"_postman_id": "bfc682f6-c0cd-48c4-b389-9e76c120fde1",
 		"name": "Ripple App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -142,6 +142,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Custom Scope",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/ripple/scope/custom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"ripple",
+								"scope",
+								"custom"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -236,12 +257,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "7012e9f5-df84-4581-a9cc-611cfb3adf86",
+							"value": "ripplepwd",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "user",
+							"value": "ripple",
 							"type": "string"
 						}
 					]
@@ -408,6 +429,46 @@
 						"ripple",
 						"logout",
 						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate JWT token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "ripple",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ripplepwd",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8083/ripple/oAuth/token/jwt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"ripple",
+						"oAuth",
+						"token",
+						"jwt"
 					]
 				}
 			},

@@ -200,7 +200,7 @@ public class RestExceptionHandlerAdvice extends ResponseEntityExceptionHandler {
 	}
 	@ExceptionHandler(EntityNotFoundException.class)  
 	//override method of ResponseEntityExceptionHandler class  
-	public final ResponseEntity<Object> handleUserNotFoundExceptions(EntityNotFoundException ex, WebRequest request)  
+	public final ResponseEntity<Object> handleEntityNotFoundExceptions(EntityNotFoundException ex, WebRequest request)  
 	{  
 		logger.info(ex.getClass().getName());
 		//
